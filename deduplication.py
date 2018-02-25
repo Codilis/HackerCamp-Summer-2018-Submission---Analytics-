@@ -18,7 +18,6 @@ def fit(data, ratio):
                    fuzz.ratio(clust['fn'][j], data['fn'][i]) > ratio):
                     flag = False
                     break
-                    pass
         if(flag):
             clust['ln'].append(data['ln'][i])
             clust['fn'].append(data['fn'][i])
