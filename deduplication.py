@@ -5,7 +5,8 @@ from fuzzywuzzy import fuzz
 #clust is the dictionery use for the clustering of similar data into one
 clust = {'ln':[],'dob':[],'gn':[],'fn':[]}
 
-#fit function takes all the dataset and analyse it and then merge the data then it findes similar, it finally returns a dictionery of different objects
+#fit function takes all the dataset and analyse it and then merge the data then it findes similar,
+#it finally returns a dictionery of different objects
 #data argument is the DataFrame or dictionery object
 # ratio tells how much strict you want your algorithm should be higher ratio means higher strictness while comparing for similar data
 def fit(data, ratio):
