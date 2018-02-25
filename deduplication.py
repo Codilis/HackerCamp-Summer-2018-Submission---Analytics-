@@ -1,13 +1,12 @@
 import pandas as pd
-import numpy as np
 from fuzzywuzzy import fuzz
 
-#clust is the dictionery use for the clustering of similar data into one
+#clust is the dictionary use for the clustering of similar data into one
 clust = {'ln':[],'dob':[],'gn':[],'fn':[]}
 
 #fit function takes all the dataset and analyse it and then merge the data then it findes similar,
-#it finally returns a dictionery of different objects
-#data argument is the DataFrame or dictionery object
+#it finally returns a dictionary of different objects
+#data argument is the DataFrame or dictionary object
 # ratio tells how much strict you want your algorithm should be higher ratio means higher strictness while comparing for similar data
 def fit(data, ratio):
     for i in range(len(data)):
@@ -25,7 +24,7 @@ def fit(data, ratio):
             clust['dob'].append(data['dob'][i])
     return clust
 
-#this function predicts the data, and returns most similar data from the clust dictionery
+#this function predicts the data, and returns most similar data from the clust dictionary
 def predict(data):
     max_ratio = 0
     prediction = {'ln':[],'dob':[],'gn':[],'fn':[]}
@@ -41,16 +40,18 @@ def predict(data):
     return prediction
                    
 
-
+#reades the csv file provided
 df = pd.read_csv('Deduplication Problem - Sample Dataset1.csv')
 
 
 cluster = fit(df, 75)
+#generates a csv file from output provided by fit function
 output_df = pd.DataFrame(cluster, columns = ['ln', 'dob', 'gn', 'fn'])
 output_df.to_csv('output.csv', encoding='utf-8', index=False)
 print(output_df)
 
 predict_df = pd.DataFrame(columns = ['ln', 'dob', 'gn', 'fn'])
+#predicts the names for input data
 predict_df = predict_df.append(pd.Series(predict({'ln':['FUNARO'],'dob':['06/12/1937'],'gn':['F'],'fn':['HARRIET']}),
                                          index=['ln', 'dob', 'gn', 'fn']), ignore_index=True)
 predict_df = predict_df.append(pd.Series(predict({'ln':[' Frometa G'],'dob':['06/12/1937'],'gn':['M'],'fn':['Vladimir']}),
@@ -59,5 +60,6 @@ predict_df = predict_df.append(pd.Series(predict({'ln':['Frometa Garo'],'dob':['
                                          index=['ln', 'dob', 'gn', 'fn']), ignore_index=True)
 predict_df = predict_df.append(pd.Series(predict({'ln':['Frometa'],'dob':['06/12/1937'],'gn':['M'],'fn':['Vladimir']}),
                                          index=['ln', 'dob', 'gn', 'fn']), ignore_index=True)
+#Generates a csv file named 'prediction.csv' for the prediction it made
 output_df.to_csv('predictions.csv', encoding='utf-8', index=False)
 print("\n\nPredictions: \n", predict_df.head())
