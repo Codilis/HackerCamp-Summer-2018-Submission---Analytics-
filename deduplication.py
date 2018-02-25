@@ -61,5 +61,5 @@ predict_df = predict_df.append(pd.Series(predict({'ln':['Frometa Garo'],'dob':['
 predict_df = predict_df.append(pd.Series(predict({'ln':['Frometa'],'dob':['06/12/1937'],'gn':['M'],'fn':['Vladimir']}),
                                          index=['ln', 'dob', 'gn', 'fn']), ignore_index=True)
 #Generates a csv file named 'prediction.csv' for the prediction it made
-output_df.to_csv('predictions.csv', encoding='utf-8', index=False)
+predict_df.to_csv('predictions.csv', encoding='utf-8', index=False)
 print("\n\nPredictions: \n", predict_df.head())
